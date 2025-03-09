@@ -1,7 +1,10 @@
-
-get_book_text
+def get_book_text(filepath):
    
-    with open(books/frankenstein) as f:
-        file_contents = f.read()
-        print"{file_contents}"
+    with open(filepath) as f:
+        return f.read()
+        
+def main():
+    book_text = get_book_text("workspace/github.com/bookbot/books/frankenstein.txt")
+    print(book_text)
 
+main()
