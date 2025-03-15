@@ -4,7 +4,7 @@ def get_book_text(filepath):
         return f.read()
         
 def main():
-    book_text = get_book_text("workspace/github.com/bookbot/books/frankenstein.txt")
+    book_text = get_book_text("/home/lilpeach/workspace/github.com/bookbot/books/frankenstein.txt")
     print(book_text)
 
 main()
