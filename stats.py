@@ -17,8 +17,19 @@ def count_chars(text):
             char_counts[char] += 1
         else:
             char_counts[char] = 1
-        # Now, what should we do with each character?
-        # If we've seen it before, we need to increase its count
-        # If it's new, we need to add it to our dictionary
         
     return char_counts
+
+def chars_dict_to_sorted_list(char_counts):
+    chars_list = []
+
+    for char, count in char_counts.items():
+        char_dict = {"char": char, "count": count}
+
+        chars_list.append(char_dict)
+
+    def sort_on(dict):
+        return dict["count"]
+    
+    chars_list.sort(reverse=True, key=sort_on)
+    return chars_list

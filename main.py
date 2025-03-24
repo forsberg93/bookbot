@@ -1,5 +1,5 @@
-from stats import get_num_words
-from stats import count_chars
+import sys
+from stats import get_num_words, count_chars, chars_dict_to_sorted_list
 
 def get_book_text(filepath):
    
@@ -7,39 +7,35 @@ def get_book_text(filepath):
         return f.read()
         
 def main():
-    book_text = get_book_text("/home/lilpeach/workspace/github.com/bookbot/books/frankenstein.txt")
 
-    words_list = book_text.split()
-    word_count = get_num_words(words_list)
+        # Check for command line arguments
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
     
+    path = sys.argv[1]
+    book_text = get_book_text(path)
+    #filepath = ("/home/lilpeach/workspace/github.com/bookbot/books/frankenstein.txt")
+    #book_text = get_book_text(filepath)
+    #book_text = get_book_text("/home/lilpeach/workspace/github.com/bookbot/books/frankenstein.txt")
+
+    word_count = get_num_words(book_text.split())
     char_counts = count_chars(book_text)
-
-    #return
-
-    # Print word count first
-    print(f"{word_count} words found in the document")
+    sorted_chars = chars_dict_to_sorted_list(char_counts)
     
-    # Fix 2: Print the char_counts dictionary, not the function
-    print(char_counts)
-
-    #print(f"{count_chars}")
-    #print(f"{word_count} words found in the document")
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {word_count} total words")
+    print("--------- Character Count -------")
     
+    for char_dict in sorted_chars:
+        char = char_dict["char"]
+        count = char_dict["count"]
+        if char.isalpha():  # Only print alphabetical characters
+            print(f"{char}: {count}")
     
-    #print(f"{num_words} words found in the document")
+    print("============= END ===============")
     
-
-    #num_words = len(words_list)
-
-
-   # print(f"{num_words} words found in the document")
-
-
-
-
-#{num_words} words found in the document
-#def main():
-#    book_text = get_book_text("/home/lilpeach/workspace/github.com/bookbot/books/frankenstein.txt")
-#    print(book_text)
-
-main()
+if __name__ == "__main__":
+    main()
